@@ -6,6 +6,7 @@ import initRouter from './routes/init.js'
 import faucetRouter from './routes/faucet.js'
 import walletRouter from './routes/wallet.js'
 import depositRouter from './routes/deposit.js'
+import transferRouter from './routes/transfer.js'
 
 const app = new Hono()
 
@@ -15,6 +16,7 @@ app.route('/init', initRouter)
 app.route('/faucet', faucetRouter)
 app.route('/balance', walletRouter)
 app.route('/deposit', depositRouter)
+app.route('/transfer', transferRouter)
 
 serve({ fetch: app.fetch, port: Number(process.env.PORT) || 3000 }, (info) => {
   console.log(`Backend running on http://localhost:${info.port}`)
