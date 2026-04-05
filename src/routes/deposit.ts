@@ -2,13 +2,12 @@ import { Hono } from 'hono'
 import { unlinkMiddleware, type UnlinkVariables } from '../middleware/unlink.js'
 import { createPublicClient, http } from 'viem'
 import { baseSepolia } from 'viem/chains'
-
-const TOKEN = '0x7501de8ea37a21e20e6e65947d2ecab0e9f061a7'
+import { DEFAULT_TOKEN } from '../lib/constants.js'
 
 const router = new Hono<{ Variables: UnlinkVariables }>()
 
 router.post('/', unlinkMiddleware, async (c) => {
-  const { amount, token = TOKEN } = await c.req.json()
+  const { amount, token = DEFAULT_TOKEN } = await c.req.json()
   const unlink = c.get('unlink')
 
   const publicClient = createPublicClient({

@@ -3,8 +3,7 @@ import { createPublicClient, http, erc20Abi } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { baseSepolia } from 'viem/chains'
 import { unlinkMiddleware, type UnlinkVariables } from '../middleware/unlink.js'
-
-const TOKEN = '0x7501de8ea37a21e20e6e65947d2ecab0e9f061a7'
+import { DEFAULT_TOKEN } from '../lib/constants.js'
 
 const router = new Hono<{ Variables: UnlinkVariables }>()
 
@@ -21,7 +20,7 @@ router.post('/unlink', unlinkMiddleware, async (c) => {
 })
 
 router.post('/public', async (c) => {
-  const { evmPrivateKey, token = TOKEN } = await c.req.json()
+  const { evmPrivateKey, token = DEFAULT_TOKEN } = await c.req.json()
   const normalizedKey = (evmPrivateKey.startsWith('0x') ? evmPrivateKey : `0x${evmPrivateKey}`) as `0x${string}`
   const account = privateKeyToAccount(normalizedKey)
 
