@@ -1,0 +1,16 @@
+meta {
+  name: POST /wallet/unlink
+  type: http
+}
+
+post {
+  url: {{baseUrl}}/wallet/unlink
+  body: json
+}
+
+body:json {
+  {
+    "unlinkMnemonic": "{{unlinkMnemonic}}",
+    "evmPrivateKey": "{{evmPrivateKey}}"
+  }
+}

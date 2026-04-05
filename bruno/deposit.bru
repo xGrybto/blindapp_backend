@@ -1,0 +1,17 @@
+meta {
+  name: POST /deposit
+  type: http
+}
+
+post {
+  url: {{baseUrl}}/deposit
+  body: json
+}
+
+body:json {
+  {
+    "unlinkMnemonic": "{{unlinkMnemonic}}",
+    "evmPrivateKey": "{{evmPrivateKey}}",
+    "amount": "1000000000000000000"
+  }
+}

@@ -1,0 +1,18 @@
+meta {
+  name: POST /withdraw
+  type: http
+}
+
+post {
+  url: {{baseUrl}}/withdraw
+  body: json
+}
+
+body:json {
+  {
+    "unlinkMnemonic": "{{unlinkMnemonic}}",
+    "evmPrivateKey": "{{evmPrivateKey}}",
+    "recipientEvmAddress": "{{recipientEvmAddress}}",
+    "amount": "500000000000000000"
+  }
+}

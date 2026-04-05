@@ -1,0 +1,17 @@
+meta {
+  name: POST /transactions
+  type: http
+}
+
+post {
+  url: {{baseUrl}}/transactions
+  body: json
+}
+
+body:json {
+  {
+    "unlinkMnemonic": "{{unlinkMnemonic}}",
+    "evmPrivateKey": "{{evmPrivateKey}}",
+    "limit": 20
+  }
+}

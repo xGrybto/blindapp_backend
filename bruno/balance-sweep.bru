@@ -1,0 +1,15 @@
+meta {
+  name: POST /wallet/sweep
+  type: http
+}
+
+post {
+  url: {{baseUrl}}/wallet/sweep
+  body: json
+}
+
+body:json {
+  {
+    "evmPrivateKey": "{{evmPrivateKey}}"
+  }
+}

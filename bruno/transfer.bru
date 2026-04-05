@@ -1,0 +1,18 @@
+meta {
+  name: POST /transfer
+  type: http
+}
+
+post {
+  url: {{baseUrl}}/transfer
+  body: json
+}
+
+body:json {
+  {
+    "unlinkMnemonic": "{{unlinkMnemonic}}",
+    "evmPrivateKey": "{{evmPrivateKey}}",
+    "recipientAddress": "{{recipientAddress}}",
+    "amount": "500000000000000000"
+  }
+}
