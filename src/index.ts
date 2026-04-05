@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 import 'dotenv/config'
 
 import initRouter from './routes/init.js'
-// import faucetRouter from './routes/faucet.js'
+import faucetRouter from './routes/faucet.js'
 import walletRouter from './routes/wallet.js'
 import depositRouter from './routes/deposit.js'
 import transferRouter from './routes/transfer.js'
@@ -16,7 +16,7 @@ const app = new Hono()
 app.get('/', (c) => c.json({ status: 'ok' }))
 
 app.route('/init', initRouter)
-// app.route('/faucet', faucetRouter)
+app.route('/faucet', faucetRouter)
 app.route('/wallet', walletRouter)
 app.route('/deposit', depositRouter)
 app.route('/transfer', transferRouter)
