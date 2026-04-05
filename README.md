@@ -1,41 +1,41 @@
 # Blind Wallet — Backend
 
-Backend stateless pour un wallet mobile de transactions ERC-20 privées sur Base Sepolia, via le SDK Unlink (Zero Knowledge Proofs). Le backend ne stocke aucune clé ni donnée utilisateur — chaque requête reçoit les secrets du mobile, exécute l'opération, et retourne le résultat.
+Stateless backend for a mobile wallet enabling private ERC-20 transactions on Base Sepolia via the Unlink SDK (Zero Knowledge Proofs). The backend stores no keys or user data — each request receives secrets from the mobile client, executes the operation, and returns the result.
 
 ## Setup
 
 ```bash
 npm install
-cp .env.example .env  # remplir UNLINK_API_KEY et RPC_URL
+cp .env.example .env  # fill in UNLINK_API_KEY and RPC_URL
 npm run dev
 ```
 
-## Variables d'environnement
+## Environment variables
 
-| Variable        | Description                                      |
-|-----------------|--------------------------------------------------|
-| `UNLINK_API_KEY` | Clé API Unlink — [hackaton-apikey.vercel.app](https://hackaton-apikey.vercel.app) |
-| `RPC_URL`        | RPC Base Sepolia (ex: Alchemy)                  |
-| `PORT`           | Port du serveur (défaut: 3000)                  |
+| Variable         | Description                                                  |
+|------------------|--------------------------------------------------------------|
+| `UNLINK_API_KEY` | Unlink API key — [hackaton-apikey.vercel.app](https://hackaton-apikey.vercel.app) |
+| `RPC_URL`        | Base Sepolia RPC URL (e.g. Alchemy)                         |
+| `PORT`           | Server port (default: 3000)                                 |
 
 ## API
 
-| Méthode | Route | Description |
-|---------|-------|-------------|
-| POST | `/init` | Génère un mnemonic BIP-39 et une clé privée EVM — appelé une seule fois à l'installation. |
-| GET | `/tokens` | Retourne la liste statique des tokens ERC-20 supportés. |
-| POST | `/wallet/address` | Retourne l'adresse Unlink (`unlink1...`) associée au mnemonic. |
-| POST | `/wallet/unlink` | Retourne les soldes privés dans le pool Unlink. |
-| POST | `/wallet/public` | Retourne le solde ERC-20 on-chain de l'EOA via viem. |
-| POST | `/wallet/sweep` | Lit les balances ERC-20 de l'EOA pour tous les tokens supportés et retourne ceux dont le montant est positif. |
-| POST | `/deposit` | Approuve le token pour Permit2 si nécessaire, puis dépose des tokens ERC-20 depuis l'EOA dans le pool Unlink. |
-| POST | `/transfer` | Transfère des tokens entre deux comptes Unlink — sender, recipient, montant et token sont tous privés on-chain. |
-| POST | `/withdraw` | Retire des tokens du pool Unlink vers une adresse EVM publique — le sender Unlink reste privé. |
-| POST | `/transactions` | Retourne l'historique des transactions du compte Unlink (paramètre `limit` optionnel, défaut 20). |
+| Method | Route | Description |
+|--------|-------|-------------|
+| POST | `/init` | Generates a BIP-39 mnemonic and an EVM private key — called once on app install. |
+| GET | `/tokens` | Returns the static list of supported ERC-20 tokens. |
+| POST | `/wallet/address` | Returns the Unlink address (`unlink1...`) derived from the mnemonic. |
+| POST | `/wallet/unlink` | Returns the private token balances in the Unlink pool. |
+| POST | `/wallet/public` | Returns the on-chain ERC-20 balance of the EOA via viem. |
+| POST | `/wallet/sweep` | Reads EOA balances for all supported tokens and returns those with a positive amount. |
+| POST | `/deposit` | Approves the token for Permit2 if needed, then deposits ERC-20 tokens from the EOA into the Unlink pool. |
+| POST | `/transfer` | Transfers tokens between two Unlink accounts — sender, recipient, amount and token are all private on-chain. |
+| POST | `/withdraw` | Withdraws tokens from the Unlink pool to a public EVM address — the Unlink sender remains private. |
+| POST | `/transactions` | Returns the transaction history of the Unlink account (optional `limit` parameter, default 20). |
 
-## Tests
+## Testing
 
-La collection Bruno est dans `bruno/`. Ouvrir le dossier dans Bruno, sélectionner l'environnement `local`, puis tester dans l'ordre :
+The Bruno collection is in `bruno/`. Open the folder in Bruno, select the `local` environment, then test in order:
 
 ```
 POST /init → POST /wallet/address → POST /wallet/sweep → POST /deposit → POST /wallet/unlink → POST /transfer → POST /withdraw → POST /transactions
