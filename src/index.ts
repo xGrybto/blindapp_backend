@@ -17,7 +17,7 @@ app.get('/', (c) => c.json({ status: 'ok' }))
 
 app.route('/init', initRouter)
 // app.route('/faucet', faucetRouter)
-app.route('/balance', walletRouter)
+app.route('/wallet', walletRouter)
 app.route('/deposit', depositRouter)
 app.route('/transfer', transferRouter)
 app.route('/withdraw', withdrawRouter)
