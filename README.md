@@ -1,6 +1,10 @@
-# Blind Wallet — Backend
+# BlindApp — Backend
 
 Stateless backend for a mobile wallet enabling private ERC-20 transactions on Base Sepolia via the Unlink SDK (Zero Knowledge Proofs). The backend stores no keys or user data — each request receives secrets from the mobile client, executes the operation, and returns the result.
+
+## Front-end project 
+
+https://github.com/iyarsius/blindapp
 
 ## Setup
 
